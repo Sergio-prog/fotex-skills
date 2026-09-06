@@ -1,0 +1,15 @@
+{
+  "name": "fotex",
+  "owner": {
+    "name": "Serhii"
+  },
+  "description": "fotex-skills as a single-plugin marketplace.",
+  "plugins": [
+    {
+      "name": "fotex-skills",
+      "source": "./",
+      "description": "Personal skills for comfortable day-to-day work with coding agents.",
+      "category": "productivity"
+    }
+  ]
+}

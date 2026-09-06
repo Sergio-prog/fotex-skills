@@ -1,0 +1,13 @@
+{
+  "name": "fotex-skills",
+  "version": "0.1.0",
+  "description": "Personal skills for comfortable day-to-day work with coding agents.",
+  "author": {
+    "name": "Serhii"
+  },
+  "license": "MIT",
+  "keywords": ["skills", "git", "github", "ci"],
+  "skills": [
+    "./skills/babysit-git"
+  ]
+}
