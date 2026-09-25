@@ -1,0 +1,25 @@
+{
+  "attribution": {
+    "commit": "",
+    "pr": "",
+    "sessionUrl": false
+  },
+  "includeCoAuthoredBy": false,
+  "permissions": {
+    "defaultMode": "auto"
+  },
+  "model": "fable[1m]",
+  "enabledPlugins": {
+    "fotex-skills@fotex": true,
+    "mattpocock-skills@claude-plugins-official": true
+  },
+  "effortLevel": "high",
+  "awaySummaryEnabled": false,
+  "voice": {
+    "enabled": false,
+    "mode": "hold"
+  },
+  "autoCompactEnabled": true,
+  "remoteControlAtStartup": false,
+  "voiceEnabled": false
+}

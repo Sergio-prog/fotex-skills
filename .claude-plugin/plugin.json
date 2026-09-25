@@ -1,13 +1,20 @@
 {
   "name": "fotex-skills",
-  "version": "0.1.0",
-  "description": "Personal skills for comfortable day-to-day work with coding agents.",
+  "version": "0.2.0",
+  "description": "Personal Claude Code skills and a portable terminal workflow.",
   "author": {
     "name": "Serhii"
   },
   "license": "MIT",
-  "keywords": ["skills", "git", "github", "ci"],
+  "keywords": ["skills", "git", "github", "ci", "design", "crypto"],
   "skills": [
-    "./skills/babysit-git"
+    "./skills/babysit-git",
+    "./skills/chainq",
+    "./skills/deslop",
+    "./skills/frontend-design",
+    "./skills/impeccable",
+    "./skills/improve",
+    "./skills/setup-pre-commit",
+    "./skills/unslop"
   ]
 }

@@ -3,12 +3,12 @@
   "owner": {
     "name": "Serhii"
   },
-  "description": "fotex-skills as a single-plugin marketplace.",
+  "description": "Personal Claude Code skills and a portable terminal workflow.",
   "plugins": [
     {
       "name": "fotex-skills",
       "source": "./",
-      "description": "Personal skills for comfortable day-to-day work with coding agents.",
+      "description": "Personal Claude Code skills and a portable terminal workflow.",
       "category": "productivity"
     }
   ]

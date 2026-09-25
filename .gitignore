@@ -1,2 +1,6 @@
 .DS_Store
 node_modules/
+config/**/.env
+config/**/*.local.json
+config/**/credentials*
+skills/**/scripts/.impeccable/

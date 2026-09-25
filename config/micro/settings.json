@@ -1,0 +1,15 @@
+{
+  "diffgutter": true,
+  "hlsearch": true,
+  "hltaberrors": true,
+  "tabstospaces": true,
+  "hltrailingws": true,
+  "keymenu": false,
+  "mkparents": true,
+  "parsecursor": true,
+  "savecursor": true,
+  "saveundo": true,
+  "scrollmargin": 5,
+  "clipboard": "terminal",
+  "useprimary": false
+}

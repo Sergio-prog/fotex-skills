@@ -1,0 +1,9 @@
+{
+    "\u001b[100~": "Redo",
+    "CtrlUnderscore": "Undo",
+    "CtrlU": "SelectToStartOfLine,Delete",
+    "Home": "StartOfLine",
+    "End": "EndOfLine",
+    "Ctrl-MouseWheelUp": "lua:initlua.scrollLeft",
+    "Ctrl-MouseWheelDown": "lua:initlua.scrollRight"
+}
