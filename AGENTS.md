@@ -20,4 +20,4 @@ An agent does not rewrite a skill's substance unprompted. Propose changes in the
 - Run `claude plugin validate . --strict` after touching a manifest.
 - `scripts/link-skills.sh` symlinks every skill into `~/.claude/skills` and `~/.agents/skills` for local use. Re-run after adding or renaming a skill.
 - `scripts/export-workflow.sh` refreshes the portable Micro, Ghostty, Claude Code, and selected skill snapshot from the current Mac. Never add credentials, MCP state, histories, caches, or machine-local hooks to the snapshot.
-- Keep `ghostty-install.sh`, `claude-install.sh`, and `install.sh` POSIX-compatible because they are executed through `curl | sh`.
+- Keep `ghostty-install.sh`, `claude-install.sh`, `harness-install.sh`, and `install.sh` POSIX-compatible because they are executed through `curl | sh`.

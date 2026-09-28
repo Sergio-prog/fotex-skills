@@ -43,24 +43,42 @@ install_npm_harness() {
 
 [ "$(uname -s)" = Linux ] || { printf 'harness-install.sh is intended for Linux hosts\n' >&2; exit 1; }
 command -v curl >/dev/null 2>&1 || { printf 'curl is required\n' >&2; exit 1; }
-command -v npm >/dev/null 2>&1 || { printf 'npm is required; run claude-install.sh first\n' >&2; exit 1; }
+
+codex=0 opencode=0 molt=0
+if [ "$#" -eq 0 ]; then
+  codex=1 opencode=1 molt=1
+fi
+for option do
+  case "$option" in
+    --codex) codex=1 ;;
+    --opencode) opencode=1 ;;
+    --molt) molt=1 ;;
+    *) printf 'unknown option: %s\n' "$option" >&2; exit 2 ;;
+  esac
+done
 
 export PATH="$HOME/.local/bin:$PATH"
-install_npm_harness codex @openai/codex
-install_npm_harness opencode opencode-ai
+if [ "$codex" -eq 1 ] || [ "$opencode" -eq 1 ]; then
+  command -v npm >/dev/null 2>&1 || { printf 'npm is required; run claude-install.sh --node-only first\n' >&2; exit 1; }
+fi
 
-if ! command -v molt >/dev/null 2>&1; then
+if [ "$codex" -eq 1 ]; then
+  install_npm_harness codex @openai/codex
+  for filename in config.toml AGENTS.md; do
+    fetch "$RAW_BASE/config/harnesses/codex/$filename" "$TEMP_DIR/$filename"
+    backup_and_install "$TEMP_DIR/$filename" "$HOME/.codex/$filename"
+  done
+fi
+
+if [ "$opencode" -eq 1 ]; then
+  install_npm_harness opencode opencode-ai
+  fetch "$RAW_BASE/config/harnesses/opencode/AGENTS.md" "$TEMP_DIR/opencode-AGENTS.md"
+  backup_and_install "$TEMP_DIR/opencode-AGENTS.md" "$HOME/.config/opencode/AGENTS.md"
+fi
+
+if [ "$molt" -eq 1 ] && ! command -v molt >/dev/null 2>&1; then
   fetch https://raw.githubusercontent.com/Sergio-prog/molt/main/install.sh "$TEMP_DIR/molt-install.sh"
   MOLT_INSTALL_DIR="$HOME/.local/bin" sh "$TEMP_DIR/molt-install.sh"
 fi
 
-for relative_path in codex/config.toml codex/AGENTS.md opencode/AGENTS.md; do
-  fetch "$RAW_BASE/config/harnesses/$relative_path" "$TEMP_DIR/$(basename "$relative_path")"
-  case "$relative_path" in
-    codex/*) destination=$HOME/.codex/$(basename "$relative_path") ;;
-    opencode/*) destination=$HOME/.config/opencode/$(basename "$relative_path") ;;
-  esac
-  backup_and_install "$TEMP_DIR/$(basename "$relative_path")" "$destination"
-done
-
-printf '[fotex] Codex, OpenCode and molt are ready. Sign in to each CLI on this host.\n'
+printf '[fotex] Selected harnesses are ready. Sign in to each CLI on this host.\n'

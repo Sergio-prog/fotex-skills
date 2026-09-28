@@ -4,13 +4,23 @@ Personal skills and a portable terminal workflow for Claude Code on Linux VPS ho
 
 ## VPS setup
 
-Install everything with one command:
+Open the package selector with one command:
 
 ```sh
 curl -LsSf https://raw.githubusercontent.com/Sergio-prog/fotex-skills/main/install.sh | sh
 ```
 
-This installs:
+Use Up/Down to move, Space to toggle, and Enter to install. All packages start selected; press N to clear them. The choices are Micro/tmux/Ghostty terminfo, Claude Code, Codex, OpenCode, molt, and chainq. Codex and OpenCode also install Node.js when needed.
+
+For an unattended host, choose packages explicitly:
+
+```sh
+curl -LsSf https://raw.githubusercontent.com/Sergio-prog/fotex-skills/main/install.sh | sh -s -- --only=micro,claude
+```
+
+Use `--all` to install every choice without a menu. Without a terminal, the installer requires `--all` or `--only=...`.
+
+The available packages include:
 
 - Micro 2.0.15 with the checked-in settings, terminal clipboard support, and `Ctrl + mouse wheel` horizontal scrolling
 - the `xterm-ghostty` terminfo entry and tmux

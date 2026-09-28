@@ -63,6 +63,26 @@ ensure_packages() {
   fi
 }
 
+ensure_node_packages() {
+  for command_name in tar gzip sha256sum; do
+    if ! command -v "$command_name" >/dev/null 2>&1; then
+      if command -v apt-get >/dev/null 2>&1; then
+        as_root apt-get update -qq
+        as_root env DEBIAN_FRONTEND=noninteractive apt-get install -y coreutils gzip tar
+      elif command -v dnf >/dev/null 2>&1; then
+        as_root dnf install -y coreutils gzip tar
+      elif command -v apk >/dev/null 2>&1; then
+        as_root apk add coreutils gzip tar
+      elif command -v pacman >/dev/null 2>&1; then
+        as_root pacman -Sy --needed --noconfirm coreutils gzip tar
+      else
+        die "install tar, gzip, and sha256sum, then rerun this script"
+      fi
+      return
+    fi
+  done
+}
+
 backup_and_install() {
   source_file=$1
   destination=$2
@@ -237,12 +257,27 @@ install_plugins() {
 
 command -v curl >/dev/null 2>&1 || die "curl is required"
 [ "$(uname -s)" = Linux ] || die "claude-install.sh is intended for Linux VPS hosts"
+mode=${1:-all}
+case "$mode" in
+  all | --no-chainq | --node-only) ;;
+  *) die "unknown option: $mode" ;;
+esac
+[ "$#" -le 1 ] || die "unexpected arguments"
+if [ "$mode" = --node-only ]; then
+  ensure_node_packages
+  install_shell_config
+  install_node
+  say "Node.js is ready"
+  exit 0
+fi
 ensure_packages
 install_shell_config
 install_node
 install_bun
 install_claude
-install_chainq
+if [ "$mode" = all ]; then
+  install_chainq
+fi
 install_claude_config
 install_plugins
 
